@@ -4,7 +4,7 @@ const Circle = (props) => {
   return (
     <div
       style={{ backgroundColor: props.color }}
-      className="circle"
+      className={`circle ${props.active ? "active" : ""}`}
       onClick={props.whatever}
     >
       <p>{props.id}</p>
