@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Bangers", cursive;
+  padding: 0.8rem 2rem;
+  border: none;
+  background-image: linear-gradient(
+    180deg,
+    rgb(179, 179, 233),
+    rgb(63, 189, 211)
+  );
+  margin: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+p {
+  margin: 2rem auto;
+}
+
+.circles {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5rem 2rem;
+  justify-content: center;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: thistle;
+  display: flex;
+  margin: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#one {
+  background-color: #000d6b;
+}
+
+#two {
+  background-color: #9c19e0;
+}
+
+#three {
+  background-color: #ff5da2;
+}
+
+#four {
+  background-color: #99ddcc;
+}
+
+.button_container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+  justify-content: center;
+}
+
+button {
+  background-color: white;
+  opacity: 0.5;
+  font-family: "Bangers", cursive;
+  padding: 1rem 2rem;
+}
+
+button:hover {
+  background-color: palegreen;
+}
+
+h1 p {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  justify-content: center;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  font-size: x-large;
+}
+
+circle p {
+  font-size: 2rem;
+}
