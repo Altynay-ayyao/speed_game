@@ -1,6 +1,6 @@
 export const circles = [
-  { id: 1, color: "green" },
-  { id: 2, color: "blue" },
-  { id: 3, color: "yellow" },
-  { id: 4, color: "red" },
+  { id: 1, color: "#F2789F" },
+  { id: 2, color: "#F2789F" },
+  { id: 3, color: "#F2789F" },
+  { id: 4, color: "#F2789F" },
 ];

@@ -3,6 +3,15 @@ import Circle from "./Circle";
 import "./index.css";
 import { circles } from "./circles";
 import GameOver from "./GameOver";
+import clickSound from "./assets/sounds/clickSound.wav";
+import gameOver from "./assets/sounds/gameOver.wav";
+
+let gameOverSound = new Audio(gameOver);
+
+let dogSound = new Audio(clickSound);
+
+const clickedList = [];
+const activeList = [];
 
 const getRndInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -13,19 +22,32 @@ class App extends Component {
     score: 0,
     current: 0,
     gameOver: false,
-    //each of circle has their own id and color
     pace: 1500,
     rounds: 0,
+    gameStart: false,
+    maxscore: 0,
   };
 
   timer = undefined;
 
-  clickHandler = (id) => {
-    console.log("you click", id);
-    if (this.state.current !== id) {
-      this.startHandler();
-      return; //return will stop it
+  clickPlay = () => {
+    if (dogSound) {
+      dogSound.play();
+    } else {
+      dogSound.currentTime = 0;
     }
+  };
+
+  clickHandler = (id) => {
+    this.clickPlay();
+
+    console.log("you clicked: ", id);
+
+    if (this.state.current !== id) {
+      this.stopHandler();
+      return;
+    }
+
     this.setState({
       score: this.state.score + 10,
       rounds: 0,
@@ -63,7 +85,9 @@ class App extends Component {
   };
 
   stopHandler = () => {
+    gameOverSound.play();
     clearTimeout(this.timer);
+
     this.setState({
       gameOver: true,
       current: 0,
@@ -72,6 +96,11 @@ class App extends Component {
   };
 
   closeHandler = () => {
+    if (this.state.score > this.state.maxscore) {
+      this.setState({
+        maxscore: this.state.score,
+      });
+    }
     this.setState({
       gameOver: false,
       score: 0,
@@ -82,33 +111,40 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         {this.state.gameOver && (
           <GameOver score={this.state.score} close={this.closeHandler} />
         )}
-        <div className="text">
-          <h1>Speed Game</h1>
-          <p>Your score is:{this.state.score}</p>
-        </div>
+        <h1> Dog fetch bone Game </h1>
+        <p>Your score: {this.state.score}</p>
 
         <div className="circles">
-          {circles.map((c) => {
-            return (
-              <Circle
-                key={c.id}
-                color={c.color}
-                id={c.id}
-                whatever={() => this.clickHandler(c.id)} //finding the data on the event
-                active={this.state.current === c.id}
-              />
-            ); //when using mapping, react wants to know the specific element, so elements has to have id, key is used for that
-          })}
+          {circles.map((c) => (
+            <Circle
+              key={c.id}
+              color={c.color}
+              id={c.id}
+              click={() => this.clickHandler(c.id)}
+              active={this.state.current === c.id}
+              disabled={this.state.gameStart}
+            />
+          ))}
         </div>
         <div className="button_container">
-          <button disabled={this.state.gameStart} onClick={this.startHandler}>
+          <button
+            className="start"
+            disabled={this.state.gameStart}
+            onClick={this.startHandler}
+          >
             Start
           </button>
-          <button onClick={this.stopHandler}>Stop</button>
+          <button
+            className="stop"
+            disabled={!this.state.gameStart}
+            onClick={this.stopHandler}
+          >
+            Stop
+          </button>
         </div>
       </div>
     );
